@@ -19,7 +19,9 @@ SELECT * FROM animals WHERE weight_kg = 10.4 OR 17.3 OR weight_kg BETWEEN 10.4 A
 -- nside a transaction update the animals table by setting the species column to unspecified. Verify that change was made. Then roll back the change and verify that the species columns went back to the state before the transaction.
 BEGIN;
 UPDATE animals SET species = 'unspecified';
+SELECT species FROM animals;
 ROLLBACK;
+SELECT species FROM animals;
 -- Inside a transaction:
 -- Update the animals table by setting the species column to digimon for all animals that have a name ending in mon.
 -- Update the animals table by setting the species column to pokemon for all animals that don't have species already set.
@@ -29,19 +31,21 @@ BEGIN;
 UPDATE animals SET species = 'digimon' WHERE name LIKE '%mon';
 UPDATE animals SET species = 'pokemon' WHERE name NOT LIKE '%mon';
  COMMIT;
+SELECT * FROM animals;
 -- Inside a transaction delete all records in the animals table, then roll back the transaction.
 -- After the rollback verify if all records in the animals table still exists.
 BEGIN;
 DELETE FROM animals;
 ROLLBACK;
+SELECT * FROM animals;
 -- Inside a transaction:
 -- Delete all animals born after Jan 1st, 2022.
 -- Create a savepoint for the transaction.
 -- Update all animals' weight to be their weight multiplied by -1.
 -- Rollback to the savepoint
 BEGIN;
-SAVEPOINT save1;
 DELETE FROM animals WHERE date_of_birth > '20220101';
+SAVEPOINT save1;
 UPDATE animals SET weight_kg = weight_kg * -1;
 ROLLBACK TO save1;
 -- Update all animals' weights that are negative to be their weight multiplied by -1.
@@ -50,7 +54,6 @@ BEGIN;
 SELECT * FROM animals;
 UPDATE animals SET weight_kg = weight_kg * -1 WHERE weight_kg < 0;
 COMMIT;
-
 -- Write queries to answer the following questions:
 
 -- How many animals are there?
