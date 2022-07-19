@@ -1,6 +1,7 @@
 CREATE TABLE patients (
 id INT,
 name VARCHAR,
+date_of_birth DATE,
 PRIMARY key(id)
 );
 
@@ -35,9 +36,11 @@ CREATE TABLE invoice_items(
   FOREIGN KEY(treatment_id) REFERENCES treatments(id) ON DELETE CASCADE
 ); 
 
-CREATE TABLE medical_treatments(
-medical_history_id INT,
-treatment_id INT,
-FOREIGN KEY(medical_history_id) REFERENCES medical_histories(id) ON DELETE CASCADE,
-FOREIGN KEY(treatment_id) REFERENCES treatments(id) ON DELETE CASCADE
+CREATE TABLE treatments (
+  id INT PRIMARY KEY,
+  type VARCHAR,
+  name VARCHAR,
+  FOREIGN KEY(id) REFERENCES medical_histories(id) ON UPDATE CASCADE
 );
+
+CREATE INDEX patients_name_asc ON patients(name ASC);
