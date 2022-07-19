@@ -44,3 +44,6 @@ CREATE TABLE treatments (
 );
 
 CREATE INDEX patients_name_asc ON patients(name ASC);
+CREATE INDEX treatment_name_asc ON treatments(name ASC);
+CREATE INDEX invoice_generated_at_asc ON invoices(generated_at ASC);
+CREATE INDEX admitted_at_asc ON medical_histories(admitted_at ASC);
