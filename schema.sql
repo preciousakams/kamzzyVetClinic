@@ -54,3 +54,5 @@ CREATE TABLE visits (
  CONSTRAINT fk_animal FOREIGN KEY(animal_id) REFERENCES animals(id) ON DELETE CASCADE,
  CONSTRAINT fk_vet FOREIGN KEY(vet_id) REFERENCES vets(id) ON DELETE CASCADE
 );
+-- ///// week 2/////
+ALTER TABLE owners ADD COLUMN email VARCHAR(120);

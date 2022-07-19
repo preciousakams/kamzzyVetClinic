@@ -105,8 +105,17 @@ SELECT COUNT(*) FROM visits JOIN animals ON visits.animal_id = animals.id JOIN v
 -- What specialty should Maisy Smith consider getting? Look for the species she gets the most.
 SELECT species.name,COUNT(species.name) FROM visits JOIN animals ON visits.animal_id = animals.id JOIN vets ON visits.vet_id = vets.id JOIN species ON animals.species_id = species.id WHERE vets.name = 'Vet Maisy Smith' GROUP BY species.name ORDER BY COUNT(species.name)DESC LIMIT 1;
 
+-- //////// WEEK 2 /////////////
+-- SELECT COUNT(*) FROM visits where animal_id = 4;
+-- SELECT * FROM visits where vet_id = 2;
+-- SELECT * FROM owners where email = 'owner_18327@mail.com';
+-- Use EXPLAIN ANALYZE on the previous queries to check what is happening. Take screenshots of them - they will be necessary later.
 
-
+-- Find a way to decrease the execution time of the first query. Look for hints in the previous lessons.
+CREATE INDEX animal_id_asc ON visits(animal_id ASC); -- execution time decreased
+-- Find a way to improve execution time of the other two queries.
+CREATE INDEX vet_id_asc ON visits(vet_id ASC);
+CREATE INDEX owner_full_name_asc ON owners(full_name ASC);
 
 
 
